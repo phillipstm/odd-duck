@@ -2,7 +2,7 @@
   FILE: oddDuck.js
   DATE: 2022-07-05
   AUTHOR: Code Fellows
-  DESCRIPTOION: handle the clicking of goats.
+  DESCRIPTOION: handle the clicking of products.
 */
 "use strict";
 
@@ -75,6 +75,16 @@ var maxClicksAllowed = 25; // the maximum number of clicks
 /**
  * Display the results of all the clicking.
  */
+ function renderResults() {
+  console.log(`In renderResults()`);
+  let ul = document.querySelector("ul");
+  for (let i = 0; i < allProductsArray.length; i++) {
+    let product = allProductsArray[i];
+    let li = document.createElement("li");
+    li.textContent = `${product.name} had ${product.views} views and was clicked ${product.clicks} times.`;
+    ul.appendChild(li);
+  }
+}
 
 
 
@@ -136,3 +146,36 @@ var maxClicksAllowed = 25; // the maximum number of clicks
     if (evt.target === productsContainer) {
       alert("Please click on an image.");
     }
+    clicks++;
+  // We don't know which random product was clicked, so loop through them
+  // to see if any match the event target
+  let clickProduct = evt.target.alt;
+  for (let i = 0; i < allProductsArray.length; i++) {
+    if (clickProduct === allProductsArray[i].name) {
+      allProductsArray[i].clicks++;
+      break;
+    }
+
+  }   
+
+  // See if we have made it to the maximum number of clicks
+  if (clicks === maxClicksAllowed) {
+  // Remove teh event listener
+  productsContainer.removeEventListener("click", handleProductClick);
+  // Enable the display results button
+  resultButton.addEventListener("click", renderResults);
+  resultButton.className = "clicks-allowed";
+  productsContainer.className = "no-voting";
+} else {
+  render();
+}
+}
+
+/**
+ * Returns a random index from the allProductsArray
+ *
+ * @returns {number} - an index from the array
+ */
+ function getRandomProductsIndex() {
+  return Math.floor(Math.random() * allProductsArray.length);
+}
