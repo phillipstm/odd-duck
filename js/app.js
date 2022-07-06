@@ -87,6 +87,41 @@ var maxClicksAllowed = 25; // the maximum number of clicks
 }
 
 
+/**
+ * Draw a chart with the goat data.
+ */
+function renderChart(){
+  console.log('In Render Chart')
+  /**
+ * Draw a chart with the product data.
+ */
+  let productName = [];
+  let productViews = [];
+  let productClicks = [];
+  for (let i = 0; i < allProductsArray.length; i++){
+    productName.push(allProductsArray[i].name);
+    productViews.push(allProductsArray[i].views);
+    productClicks.push(allProductsArray[i].clicks);
+  }
+
+  /**
+ * Draw a chart with the goat data.
+ */
+  const data = {
+    labels: productName,
+    datasets: [
+      {
+      label: "Likes",
+      data: productViews,
+      backgroundColor: ["rgba(0,0,255,0.3)"],
+      borderColor: ["rgb(255,99,132)"],
+      borderWidth: 1,
+    }
+    ]
+    }
+  }
+}
+
 
 /* ****************************************************************************
     CONTROL LOGIC
@@ -166,6 +201,7 @@ var maxClicksAllowed = 25; // the maximum number of clicks
   resultButton.addEventListener("click", renderResults);
   resultButton.className = "clicks-allowed";
   productsContainer.className = "no-voting";
+  renderChart();
 } else {
   render();
 }
