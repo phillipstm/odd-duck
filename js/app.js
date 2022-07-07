@@ -16,8 +16,8 @@ var image2; // an image element
 var image3; // an image element
 var allProductsArray; // an array of product objects
 var clicks = 0; // the number of user clicks
-var maxClicksAllowed = 25; // the maximum number of clicks
-
+var maxClicksAllowed = 10; // the maximum number of clicks
+var previousSet = [] //the last product images displayed
 
 /* ****************************************************************************
     Products OBJECTS (Data/Model Objects)
@@ -29,7 +29,7 @@ var maxClicksAllowed = 25; // the maximum number of clicks
  * @param {string} name - the name of the products
  * @param {string} src - path and file name for an image of the product.
  */
- function Product(name, src) {
+function Product(name, src) {
   this.name = name;
   this.src = src;
   this.views = 0;
@@ -45,17 +45,17 @@ var maxClicksAllowed = 25; // the maximum number of clicks
 /**
  * Draw three random products on the page.
  */
- function render() {
+function render() {
   console.log(`In render()`);
-  // Get two random goats
+  // Get three random products
   let product1 = getRandomProductsIndex();
   let product2 = getRandomProductsIndex();
   let product3 = getRandomProductsIndex();
   // Make sure they are not the same product
-  while (product1 === product2 || product1 === product3){
-    product1 = getRandomProductsIndex();   
+  while (product1 === product2 || product1 === product3) {
+    product1 = getRandomProductsIndex();
   }
-  while (product1 === product2 || product2 === product3){
+  while (product1 === product2 || product2 === product3) {
     product1 = getRandomProductsIndex();
   }
   // Set the image values
@@ -65,6 +65,19 @@ var maxClicksAllowed = 25; // the maximum number of clicks
   image2.alt = allProductsArray[product2].name;
   image3.src = allProductsArray[product3].src;
   image3.alt = allProductsArray[product3].name;
+  //find previous product set array
+  previousSet = currentSet;
+  currentSet = [i];
+  for currentSet(i) {
+    index = getRandomProductsIndex();
+    while (currentSet.include(index) || previousSet.include(index));
+    index = getRandomProductsIndex();
+    currentSet.push(i);
+  }
+  index = getRandomProductsIndex
+ 
+
+
   // increment the view counts
   allProductsArray[product1].views++;
   allProductsArray[product2].views++;
@@ -75,7 +88,7 @@ var maxClicksAllowed = 25; // the maximum number of clicks
 /**
  * Display the results of all the clicking.
  */
- function renderResults() {
+function renderResults() {
   console.log(`In renderResults()`);
   let ul = document.querySelector("ul");
   for (let i = 0; i < allProductsArray.length; i++) {
@@ -88,40 +101,62 @@ var maxClicksAllowed = 25; // the maximum number of clicks
 
 
 /**
- * Draw a chart with the goat data.
+ * Draw a chart with the product data.
  */
-function renderChart(){
-  console.log('In Render Chart')
+function renderChart() {
+  console.log('In Render Chart');
   /**
  * Draw a chart with the product data.
  */
   let productName = [];
   let productViews = [];
   let productClicks = [];
-  for (let i = 0; i < allProductsArray.length; i++){
+  for (let i = 0; i < allProductsArray.length; i++) {
     productName.push(allProductsArray[i].name);
     productViews.push(allProductsArray[i].views);
     productClicks.push(allProductsArray[i].clicks);
   }
 
   /**
- * Draw a chart with the goat data.
+ * Draw a chart with the product data.
  */
   const data = {
     labels: productName,
     datasets: [
       {
-      label: "Likes",
-      data: productViews,
-      backgroundColor: ["rgba(0,0,255,0.3)"],
-      borderColor: ["rgb(255,99,132)"],
-      borderWidth: 1,
-    }
-    ]
-    }
+        label: "Likes",
+        data: productViews,
+        backgroundColor: ["rgba(0,0,255,0.3)"],
+        borderColor: ["rgb(255,99,132)"],
+        borderWidth: 1,
+      },
+      {
+        label: "Views",
+        data: productViews,
+        backgroundColor: ["rgba(255,159,64,0.2)"],
+        borderColor: ["rgb(255,159,64)"],
+        borderWidth: 1,
+      },
+    ],
   }
-}
+  // configure the graph
+  const config = {
+    type: "bar",
+    data: data,
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  };
 
+  // Get a reference to the Canvas element
+  let canvasChart = document.getElementById("myChart");
+  // Draw the chart
+  const myChart = new Chart(canvasChart, config);
+};
 
 /* ****************************************************************************
     CONTROL LOGIC
@@ -132,11 +167,11 @@ function renderChart(){
  * perform the initial render.
  */
 
- function initialize() {
+function initialize() {
   console.log(`In initialize()`);
   // Get initiall references to HTML elements
   productsContainer = document.querySelector("section");
-  resultButton = document.querySelector("section + div");
+  resultButton = document.getElementById("viewResultsDiv");
   image1 = document.querySelector("section img:first-child");
   image2 = document.querySelector("section img:nth-child(2)");
   image3 = document.querySelector("section img:nth-child(3)")
@@ -156,7 +191,7 @@ function renderChart(){
   allProductsArray.push(new Product("Pet-sweep", "./images/pet-sweep.jpg"));
   allProductsArray.push(new Product("Scissors", "./images/scissors.jpg"));
   allProductsArray.push(new Product("Shark", "./images/shark.jpg"));
-  allProductsArray.push(new Product("Sweep", "./images/sweep.jpg"));
+  allProductsArray.push(new Product("Sweep", "./images/sweep.png"));
   allProductsArray.push(new Product("Tauntaun", "./images/tauntaun.jpg"));
   allProductsArray.push(new Product("Unicorn", "./images/unicorn.jpg"));
   allProductsArray.push(new Product("Water-can", "./images/water-can.jpg"));
@@ -167,21 +202,21 @@ function renderChart(){
   // perform the initial render
   render();
 
- }
+}
 
 
- /**
- * Handles the clicking of a product.
- *
- * @param {event} evt - the event object
- */
-  function handleProductClick(evt) {
-    console.log(`In handleProductClick()`);
-    // Test to see if we have clicked an image
-    if (evt.target === productsContainer) {
-      alert("Please click on an image.");
-    }
-    clicks++;
+/**
+* Handles the clicking of a product.
+*
+* @param {event} evt - the event object
+*/
+function handleProductClick(evt) {
+  console.log(`In handleProductClick() clicks: ${clicks}, maxClicksallowed; ${maxClicksAllowed}`);
+  // Test to see if we have clicked an image
+  if (evt.target === productsContainer) {
+    alert("Please click on an image.");
+  }
+  clicks++;
   // We don't know which random product was clicked, so loop through them
   // to see if any match the event target
   let clickProduct = evt.target.alt;
@@ -191,20 +226,21 @@ function renderChart(){
       break;
     }
 
-  }   
+  }
 
   // See if we have made it to the maximum number of clicks
   if (clicks === maxClicksAllowed) {
-  // Remove teh event listener
-  productsContainer.removeEventListener("click", handleProductClick);
-  // Enable the display results button
-  resultButton.addEventListener("click", renderResults);
-  resultButton.className = "clicks-allowed";
-  productsContainer.className = "no-voting";
-  renderChart();
-} else {
-  render();
-}
+    console.log('Reached Max Clicks');
+    // Remove teh event listener
+    productsContainer.removeEventListener("click", handleProductClick);
+    // Enable the display results button
+    resultButton.addEventListener("click", renderResults);
+    resultButton.className = "clicks-allowed";
+    productsContainer.className = "no-voting";
+    renderChart();
+  } else {
+    render();
+  }
 }
 
 /**
@@ -212,6 +248,6 @@ function renderChart(){
  *
  * @returns {number} - an index from the array
  */
- function getRandomProductsIndex() {
+function getRandomProductsIndex() {
   return Math.floor(Math.random() * allProductsArray.length);
 }
