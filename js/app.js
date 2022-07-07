@@ -1,23 +1,24 @@
+/* eslint-disable no-unused-vars */
 /*
   FILE: oddDuck.js
   DATE: 2022-07-05
   AUTHOR: Code Fellows
   DESCRIPTOION: handle the clicking of products.
 */
-"use strict";
+'use strict';
 
 /* ****************************************************************************
     GLOBAL VARIABLES
 **************************************************************************** */
-var productsContainer; // HTML element for products
-var resultButton; // a button to show results
-var image1; // an image element
-var image2; // an image element
-var image3; // an image element
-var allProductsArray; // an array of product objects
-var clicks = 0; // the number of user clicks
-var maxClicksAllowed = 10; // the maximum number of clicks
-var previousSet = [] //the last product images displayed
+let productsContainer; // HTML element for products
+let resultButton; // a button to show results
+let image1; // an image element
+let image2; // an image element
+let image3; // an image element
+let allProductsArray; // an array of product objects
+let clicks = 0; // the number of user clicks
+let maxClicksAllowed = 10; // the maximum number of clicks
+let previousSet = []; //the last product images displayed
 
 /* ****************************************************************************
     Products OBJECTS (Data/Model Objects)
@@ -46,14 +47,14 @@ function Product(name, src) {
  * Draw three random products on the page.
  */
 function render() {
-  console.log(`In render()`);
+  console.log('In render()');
   // Get three random products
   let currentSet = [];
   for (let i = 0; i < 3; i++) {
     let index = getRandomProductsIndex();
     while (previousSet.includes(index) || currentSet.includes(index)){
       index = getRandomProductsIndex();
-    }    
+    }
     currentSet.push(index);
   }
   previousSet = currentSet;
@@ -75,8 +76,8 @@ function render() {
   image3.src = allProductsArray[currentSet[2]].src;
   image3.alt = allProductsArray[currentSet[2]].name;
   //find previous product set array
-  
- 
+
+
 
 
   // increment the view counts
@@ -90,11 +91,11 @@ function render() {
  * Display the results of all the clicking.
  */
 function renderResults() {
-  console.log(`In renderResults()`);
-  let ul = document.querySelector("ul");
+  console.log('In renderResults()');
+  let ul = document.querySelector('ul');
   for (let i = 0; i < allProductsArray.length; i++) {
     let product = allProductsArray[i];
-    let li = document.createElement("li");
+    let li = document.createElement('li');
     li.textContent = `${product.name} had ${product.views} views and was clicked ${product.clicks} times.`;
     ul.appendChild(li);
   }
@@ -125,24 +126,24 @@ function renderChart() {
     labels: productName,
     datasets: [
       {
-        label: "Likes",
+        label: 'Likes',
         data: productViews,
-        backgroundColor: ["rgba(0,0,255,0.3)"],
-        borderColor: ["rgb(255,99,132)"],
+        backgroundColor: ['rgba(0,0,255,0.3)'],
+        borderColor: ['rgb(255,99,132)'],
         borderWidth: 1,
       },
       {
-        label: "Views",
+        label: 'Views',
         data: productViews,
-        backgroundColor: ["rgba(255,159,64,0.2)"],
-        borderColor: ["rgb(255,159,64)"],
+        backgroundColor: ['rgba(255,159,64,0.2)'],
+        borderColor: ['rgb(255,159,64)'],
         borderWidth: 1,
       },
     ],
-  }
+  };
   // configure the graph
   const config = {
-    type: "bar",
+    type: 'bar',
     data: data,
     options: {
       scales: {
@@ -154,10 +155,10 @@ function renderChart() {
   };
 
   // Get a reference to the Canvas element
-  let canvasChart = document.getElementById("myChart");
+  let canvasChart = document.getElementById('myChart');
   // Draw the chart
   const myChart = new Chart(canvasChart, config);
-};
+}
 
 /* ****************************************************************************
     CONTROL LOGIC
@@ -169,37 +170,37 @@ function renderChart() {
  */
 
 function initialize() {
-  console.log(`In initialize()`);
+  console.log('In initialize()');
   // Get initiall references to HTML elements
-  productsContainer = document.querySelector("section");
-  resultButton = document.getElementById("viewResultsDiv");
-  image1 = document.querySelector("section img:first-child");
-  image2 = document.querySelector("section img:nth-child(2)");
-  image3 = document.querySelector("section img:nth-child(3)")
+  productsContainer = document.querySelector('section');
+  resultButton = document.getElementById('viewResultsDiv');
+  image1 = document.querySelector('section img:first-child');
+  image2 = document.querySelector('section img:nth-child(2)');
+  image3 = document.querySelector('section img:nth-child(3)');
   // instantiate products
   allProductsArray = [];
-  allProductsArray.push(new Product("Bag", "./images/bag.jpg"));
-  allProductsArray.push(new Product("Banana", "./images/banana.jpg"));
-  allProductsArray.push(new Product("Bathroom", "./images/bathroom.jpg"));
-  allProductsArray.push(new Product("Boots", "./images/boots.jpg"));
-  allProductsArray.push(new Product("Breakfast", "./images/breakfast.jpg"));
-  allProductsArray.push(new Product("Bubblegum", "./images/bubblegum.jpg"));
-  allProductsArray.push(new Product("Chair", "./images/chair.jpg"));
-  allProductsArray.push(new Product("Cthulhu", "./images/cthulhu.jpg"));
-  allProductsArray.push(new Product("Dog-duck", "./images/dog-duck.jpg"));
-  allProductsArray.push(new Product("Dragon", "./images/dragon.jpg"));
-  allProductsArray.push(new Product("Pen", "./images/pen.jpg"));
-  allProductsArray.push(new Product("Pet-sweep", "./images/pet-sweep.jpg"));
-  allProductsArray.push(new Product("Scissors", "./images/scissors.jpg"));
-  allProductsArray.push(new Product("Shark", "./images/shark.jpg"));
-  allProductsArray.push(new Product("Sweep", "./images/sweep.png"));
-  allProductsArray.push(new Product("Tauntaun", "./images/tauntaun.jpg"));
-  allProductsArray.push(new Product("Unicorn", "./images/unicorn.jpg"));
-  allProductsArray.push(new Product("Water-can", "./images/water-can.jpg"));
-  allProductsArray.push(new Product("Wine-glass", "./images/wine-glass.jpg"));
+  allProductsArray.push(new Product('Bag', './images/bag.jpg'));
+  allProductsArray.push(new Product('Banana', './images/banana.jpg'));
+  allProductsArray.push(new Product('Bathroom', './images/bathroom.jpg'));
+  allProductsArray.push(new Product('Boots', './images/boots.jpg'));
+  allProductsArray.push(new Product('Breakfast', './images/breakfast.jpg'));
+  allProductsArray.push(new Product('Bubblegum', './images/bubblegum.jpg'));
+  allProductsArray.push(new Product('Chair', './images/chair.jpg'));
+  allProductsArray.push(new Product('Cthulhu', './images/cthulhu.jpg'));
+  allProductsArray.push(new Product('Dog-duck', './images/dog-duck.jpg'));
+  allProductsArray.push(new Product('Dragon', './images/dragon.jpg'));
+  allProductsArray.push(new Product('Pen', './images/pen.jpg'));
+  allProductsArray.push(new Product('Pet-sweep', './images/pet-sweep.jpg'));
+  allProductsArray.push(new Product('Scissors', './images/scissors.jpg'));
+  allProductsArray.push(new Product('Shark', './images/shark.jpg'));
+  allProductsArray.push(new Product('Sweep', './images/sweep.png'));
+  allProductsArray.push(new Product('Tauntaun', './images/tauntaun.jpg'));
+  allProductsArray.push(new Product('Unicorn', './images/unicorn.jpg'));
+  allProductsArray.push(new Product('Water-can', './images/water-can.jpg'));
+  allProductsArray.push(new Product('Wine-glass', './images/wine-glass.jpg'));
 
   // Set any event handlers
-  productsContainer.addEventListener("click", handleProductClick);
+  productsContainer.addEventListener('click', handleProductClick);
   // perform the initial render
   render();
 
@@ -215,7 +216,7 @@ function handleProductClick(evt) {
   console.log(`In handleProductClick() clicks: ${clicks}, maxClicksallowed; ${maxClicksAllowed}`);
   // Test to see if we have clicked an image
   if (evt.target === productsContainer) {
-    alert("Please click on an image.");
+    alert('Please click on an image.');
   }
   clicks++;
   // We don't know which random product was clicked, so loop through them
@@ -233,11 +234,11 @@ function handleProductClick(evt) {
   if (clicks === maxClicksAllowed) {
     console.log('Reached Max Clicks');
     // Remove teh event listener
-    productsContainer.removeEventListener("click", handleProductClick);
+    productsContainer.removeEventListener('click', handleProductClick);
     // Enable the display results button
-    resultButton.addEventListener("click", renderResults);
-    resultButton.className = "clicks-allowed";
-    productsContainer.className = "no-voting";
+    resultButton.addEventListener('click', renderResults);
+    resultButton.className = 'clicks-allowed';
+    productsContainer.className = 'no-voting';
     renderChart();
   } else {
     render();
