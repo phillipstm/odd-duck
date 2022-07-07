@@ -48,40 +48,41 @@ function Product(name, src) {
 function render() {
   console.log(`In render()`);
   // Get three random products
-  let product1 = getRandomProductsIndex();
-  let product2 = getRandomProductsIndex();
-  let product3 = getRandomProductsIndex();
-  // Make sure they are not the same product
-  while (product1 === product2 || product1 === product3) {
-    product1 = getRandomProductsIndex();
+  let currentSet = [];
+  for (let i = 0; i < 3; i++) {
+    let index = getRandomProductsIndex();
+    while (previousSet.includes(index) || currentSet.includes(index)){
+      index = getRandomProductsIndex();
+    }    
+    currentSet.push(index);
   }
-  while (product1 === product2 || product2 === product3) {
-    product1 = getRandomProductsIndex();
-  }
-  // Set the image values
-  image1.src = allProductsArray[product1].src;
-  image1.alt = allProductsArray[product1].name;
-  image2.src = allProductsArray[product2].src;
-  image2.alt = allProductsArray[product2].name;
-  image3.src = allProductsArray[product3].src;
-  image3.alt = allProductsArray[product3].name;
-  //find previous product set array
   previousSet = currentSet;
-  currentSet = [i];
-  for currentSet(i) {
-    index = getRandomProductsIndex();
-    while (currentSet.include(index) || previousSet.include(index));
-    index = getRandomProductsIndex();
-    currentSet.push(i);
-  }
-  index = getRandomProductsIndex
+  // let product1 = getRandomProductsIndex();
+  // let product2 = getRandomProductsIndex();
+  // let product3 = getRandomProductsIndex();
+  // // Make sure they are not the same product
+  // while (product1 === product2 || product1 === product3) {
+  //   product1 = getRandomProductsIndex();
+  // }
+  // while (product1 === product2 || product2 === product3) {
+  //   product1 = getRandomProductsIndex();
+  // }
+  // Set the image values
+  image1.src = allProductsArray[currentSet[0]].src;
+  image1.alt = allProductsArray[currentSet[0]].name;
+  image2.src = allProductsArray[currentSet[1]].src;
+  image2.alt = allProductsArray[currentSet[1]].name;
+  image3.src = allProductsArray[currentSet[2]].src;
+  image3.alt = allProductsArray[currentSet[2]].name;
+  //find previous product set array
+  
  
 
 
   // increment the view counts
-  allProductsArray[product1].views++;
-  allProductsArray[product2].views++;
-  allProductsArray[product3].views++;
+  allProductsArray[currentSet[0]].views++;
+  allProductsArray[currentSet[1]].views++;
+  allProductsArray[currentSet[2]].views++;
 }
 
 
