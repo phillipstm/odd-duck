@@ -17,7 +17,7 @@ let image2; // an image element
 let image3; // an image element
 let allProductsArray; // an array of product objects
 let clicks = 0; // the number of user clicks
-let maxClicksAllowed = 10; // the maximum number of clicks
+let maxClicksAllowed = 25; // the maximum number of clicks
 let previousSet = []; //the last product images displayed
 
 /* ****************************************************************************
@@ -36,22 +36,6 @@ function Product(name, src) {
   this.views = 0;
   this.clicks = 0;
 }
-
-/* ************* Local Storage***************************** */
-
-
-// a function that checks storage...getItem
-
-
-
-// get collection of products from storage
-console.log(JSON.stringify(previousSet));
-
-
-
-
-// function to setItem to storage
-
 
 
 
