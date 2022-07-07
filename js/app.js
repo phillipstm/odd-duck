@@ -157,6 +157,7 @@ function renderChart() {
   // Get a reference to the Canvas element
   let canvasChart = document.getElementById('myChart');
   // Draw the chart
+  // eslint-disable-next-line no-undef
   const myChart = new Chart(canvasChart, config);
 }
 
