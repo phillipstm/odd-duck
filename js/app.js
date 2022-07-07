@@ -37,6 +37,24 @@ function Product(name, src) {
   this.clicks = 0;
 }
 
+/* ************* Local Storage***************************** */
+
+
+// a function that checks storage...getItem
+
+
+
+// get collection of products from storage
+console.log(JSON.stringify(previousSet));
+
+
+
+
+// function to setItem to storage
+
+
+
+
 
 /* ****************************************************************************
     VIEW LOGIC
@@ -84,6 +102,8 @@ function render() {
   allProductsArray[currentSet[0]].views++;
   allProductsArray[currentSet[1]].views++;
   allProductsArray[currentSet[2]].views++;
+  /// update the local storage
+  localStorage.setItem("products",JSON.stringify({"data":allProductsArray}));
 }
 
 
@@ -179,27 +199,34 @@ function initialize() {
   image2 = document.querySelector('section img:nth-child(2)');
   image3 = document.querySelector('section img:nth-child(3)');
   // instantiate products
-  allProductsArray = [];
-  allProductsArray.push(new Product('Bag', './images/bag.jpg'));
-  allProductsArray.push(new Product('Banana', './images/banana.jpg'));
-  allProductsArray.push(new Product('Bathroom', './images/bathroom.jpg'));
-  allProductsArray.push(new Product('Boots', './images/boots.jpg'));
-  allProductsArray.push(new Product('Breakfast', './images/breakfast.jpg'));
-  allProductsArray.push(new Product('Bubblegum', './images/bubblegum.jpg'));
-  allProductsArray.push(new Product('Chair', './images/chair.jpg'));
-  allProductsArray.push(new Product('Cthulhu', './images/cthulhu.jpg'));
-  allProductsArray.push(new Product('Dog-duck', './images/dog-duck.jpg'));
-  allProductsArray.push(new Product('Dragon', './images/dragon.jpg'));
-  allProductsArray.push(new Product('Pen', './images/pen.jpg'));
-  allProductsArray.push(new Product('Pet-sweep', './images/pet-sweep.jpg'));
-  allProductsArray.push(new Product('Scissors', './images/scissors.jpg'));
-  allProductsArray.push(new Product('Shark', './images/shark.jpg'));
-  allProductsArray.push(new Product('Sweep', './images/sweep.png'));
-  allProductsArray.push(new Product('Tauntaun', './images/tauntaun.jpg'));
-  allProductsArray.push(new Product('Unicorn', './images/unicorn.jpg'));
-  allProductsArray.push(new Product('Water-can', './images/water-can.jpg'));
-  allProductsArray.push(new Product('Wine-glass', './images/wine-glass.jpg'));
+  let result = localStorage.getItem("products");
+  if(result===null){
 
+    allProductsArray = [];
+    allProductsArray.push(new Product('Bag', './images/bag.jpg'));
+    allProductsArray.push(new Product('Banana', './images/banana.jpg'));
+    allProductsArray.push(new Product('Bathroom', './images/bathroom.jpg'));
+    allProductsArray.push(new Product('Boots', './images/boots.jpg'));
+    allProductsArray.push(new Product('Breakfast', './images/breakfast.jpg'));
+    allProductsArray.push(new Product('Bubblegum', './images/bubblegum.jpg'));
+    allProductsArray.push(new Product('Chair', './images/chair.jpg'));
+    allProductsArray.push(new Product('Cthulhu', './images/cthulhu.jpg'));
+    allProductsArray.push(new Product('Dog-duck', './images/dog-duck.jpg'));
+    allProductsArray.push(new Product('Dragon', './images/dragon.jpg'));
+    allProductsArray.push(new Product('Pen', './images/pen.jpg'));
+    allProductsArray.push(new Product('Pet-sweep', './images/pet-sweep.jpg'));
+    allProductsArray.push(new Product('Scissors', './images/scissors.jpg'));
+    allProductsArray.push(new Product('Shark', './images/shark.jpg'));
+    allProductsArray.push(new Product('Sweep', './images/sweep.png'));
+    allProductsArray.push(new Product('Tauntaun', './images/tauntaun.jpg'));
+    allProductsArray.push(new Product('Unicorn', './images/unicorn.jpg'));
+    allProductsArray.push(new Product('Water-can', './images/water-can.jpg'));
+    allProductsArray.push(new Product('Wine-glass', './images/wine-glass.jpg'));
+    console.log(JSON.stringify({"data":allProductsArray}));
+    localStorage.setItem("products",JSON.stringify({"data":allProductsArray}));
+  } else{
+    allProductsArray=JSON.parse(result).data;
+  }
   // Set any event handlers
   productsContainer.addEventListener('click', handleProductClick);
   // perform the initial render
