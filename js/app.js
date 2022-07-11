@@ -54,7 +54,7 @@ function render() {
   let currentSet = [];
   for (let i = 0; i < 3; i++) {
     let index = getRandomProductsIndex();
-    while (previousSet.includes(index) || currentSet.includes(index)){
+    while (previousSet.includes(index) || currentSet.includes(index)) {
       index = getRandomProductsIndex();
     }
     currentSet.push(index);
@@ -87,7 +87,7 @@ function render() {
   allProductsArray[currentSet[1]].views++;
   allProductsArray[currentSet[2]].views++;
   /// update the local storage
-  localStorage.setItem("products",JSON.stringify({"data":allProductsArray}));
+  localStorage.setItem('products', JSON.stringify({ 'data': allProductsArray }));
 }
 
 
@@ -183,8 +183,8 @@ function initialize() {
   image2 = document.querySelector('section img:nth-child(2)');
   image3 = document.querySelector('section img:nth-child(3)');
   // instantiate products
-  let result = localStorage.getItem("products");
-  if(result===null){
+  let result = localStorage.getItem('products');
+  if (result === null) {
 
     allProductsArray = [];
     allProductsArray.push(new Product('Bag', './images/bag.jpg'));
@@ -206,10 +206,10 @@ function initialize() {
     allProductsArray.push(new Product('Unicorn', './images/unicorn.jpg'));
     allProductsArray.push(new Product('Water-can', './images/water-can.jpg'));
     allProductsArray.push(new Product('Wine-glass', './images/wine-glass.jpg'));
-    console.log(JSON.stringify({"data":allProductsArray}));
-    localStorage.setItem("products",JSON.stringify({"data":allProductsArray}));
-  } else{
-    allProductsArray=JSON.parse(result).data;
+    console.log(JSON.stringify({ 'data': allProductsArray }));
+    localStorage.setItem('products', JSON.stringify({ 'data': allProductsArray }));
+  } else {
+    allProductsArray = JSON.parse(result).data;
   }
   // Set any event handlers
   productsContainer.addEventListener('click', handleProductClick);

@@ -4,7 +4,7 @@
 
 body {
   font-family: Georgia, 'Times New Roman', Times, serif;
-  background-color:rgba(172, 226, 233, 0.3);
+  background-color: rgba(172, 226, 233, 0.3);
   color: rgb(38, 14, 133);
 }
 
@@ -45,8 +45,8 @@ section {
   grid-column-end: 3;
   padding: 2rem;
   display: flex;
-  justify-content: space-between; 
-  align-items: flex-start; 
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
 /* -- product images --*/
@@ -58,12 +58,14 @@ section img {
   added in :hover styles --*/
   border: 5px solid transparent;
 }
+
 /*-- add hover states so the user can tell what 
 behavior is expected of them--*/
 section img:hover {
   border: 5px solid rosybrown;
   cursor: pointer;
 }
+
 /* once voting ends */
 section.no-voting img:hover {
   border: 5px solid transparent;
@@ -74,6 +76,7 @@ section.no-voting img:hover {
 ul {
   margin: 1rem;
 }
+
 li {
   margin: .5rem;
 }
@@ -88,22 +91,23 @@ li {
   font-size: .8rem;
   margin: 1rem; */
 
-  /* —— Demo stretch goal —— */
-  /* This code improves the UX. Making it clear what the user should 
+/* —— Demo stretch goal —— */
+/* This code improves the UX. Making it clear what the user should 
   do once the voting cycle ends. Do not demo this unless you do the 
   below 'section + div.clicks-allowed' code as well. The class  
   'clicks-allowed' must be added to the element via the JavaScript. */
 
-  pointer-events: none;
-}
+/* pointer-events: none;
+} */
 /* Demo stretch goal: */
-section + div.clicks-allowed {
+section+div.clicks-allowed {
   background-color: rosybrown;
   color: white;
   cursor: pointer;
   pointer-events: auto;
 }
-section + div.clicks-allowed:hover {
+
+section+div.clicks-allowed:hover {
   background-color: rgb(55, 67, 195)
 }
 
