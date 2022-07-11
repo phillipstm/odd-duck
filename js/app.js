@@ -94,16 +94,16 @@ function render() {
 /**
  * Display the results of all the clicking.
  */
-function renderResults() {
-  console.log('In renderResults()');
-  let ul = document.querySelector('ul');
-  for (let i = 0; i < allProductsArray.length; i++) {
-    let product = allProductsArray[i];
-    let li = document.createElement('li');
-    li.textContent = `${product.name} had ${product.views} views and was clicked ${product.clicks} times.`;
-    ul.appendChild(li);
-  }
-}
+// function renderResults() {
+//   console.log('In renderResults()');
+//   let ul = document.querySelector('ul');
+//   for (let i = 0; i < allProductsArray.length; i++) {
+//     let product = allProductsArray[i];
+//     let li = document.createElement('li');
+//     li.textContent = `${product.name} had ${product.views} views and was clicked ${product.clicks} times.`;
+//     ul.appendChild(li);
+//   }
+// }
 
 
 /**
@@ -131,7 +131,7 @@ function renderChart() {
     datasets: [
       {
         label: 'Likes',
-        data: productViews,
+        data: productClicks,
         backgroundColor: ['rgba(0,0,255,0.3)'],
         borderColor: ['rgb(255,99,132)'],
         borderWidth: 1,
@@ -178,7 +178,7 @@ function initialize() {
   console.log('In initialize()');
   // Get initiall references to HTML elements
   productsContainer = document.querySelector('section');
-  resultButton = document.getElementById('viewResultsDiv');
+  // resultButton = document.getElementById('viewResultsDiv');
   image1 = document.querySelector('section img:first-child');
   image2 = document.querySelector('section img:nth-child(2)');
   image3 = document.querySelector('section img:nth-child(3)');
@@ -248,8 +248,8 @@ function handleProductClick(evt) {
     // Remove teh event listener
     productsContainer.removeEventListener('click', handleProductClick);
     // Enable the display results button
-    resultButton.addEventListener('click', renderResults);
-    resultButton.className = 'clicks-allowed';
+    // resultButton.addEventListener('click', renderResults);
+    // resultButton.className = 'clicks-allowed';
     productsContainer.className = 'no-voting';
     renderChart();
   } else {

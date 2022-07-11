@@ -79,14 +79,14 @@ li {
 }
 
 /* -- button -- */
-section + div {
+/* section + div {
   background-color: darkgray;
   color: lightgrey;
   padding: .5rem 1rem;
   width: max-content;
   height: max-content;
   font-size: .8rem;
-  margin: 1rem;
+  margin: 1rem; */
 
   /* —— Demo stretch goal —— */
   /* This code improves the UX. Making it clear what the user should 
@@ -104,14 +104,16 @@ section + div.clicks-allowed {
   pointer-events: auto;
 }
 section + div.clicks-allowed:hover {
-  background-color: rgb(211, 187, 175)
+  background-color: rgb(55, 67, 195)
 }
 
 /* Chart Styling
 */
 #chartDiv {
+  width: 1024px;
+  margin: 3rem auto;
   padding: 2rem;
-  grid-column-start: 2;
+  grid-column-start: 1;
   grid-column-end: 3;
 
 }
